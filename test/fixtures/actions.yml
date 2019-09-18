@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  duration: 1
+  description: MyString
+  due: 2019-09-18 11:43:45
+  importance: 1
+  desirability: 1
+  supplies: MyString
+  environment: 
+
+two:
+  name: MyString
+  duration: 1
+  description: MyString
+  due: 2019-09-18 11:43:45
+  importance: 1
+  desirability: 1
+  supplies: MyString
+  environment: 
