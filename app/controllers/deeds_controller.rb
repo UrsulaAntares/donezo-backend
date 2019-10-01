@@ -33,7 +33,7 @@ class DeedsController < ApplicationController
     end
 
     def update 
-   
+
         deed = Deed.all.find(params["id"])
 
         if params["result_deed"] 
@@ -73,7 +73,7 @@ class DeedsController < ApplicationController
 
     def deed_params
         params.require(:deed).permit(:name, :user_id, :duration, :tags, :status, :description, :portfolio, :cause_deed, :result_deed,
-         :duedate, :duetime, :donedate, :donetime, :importance, :desirability, :supplies, :pack, :scale, :environment )
+         :start, :end, :duetime, :donedate, :donetime, :importance, :desirability, :supplies, :pack, :scale, :environment )
     end
 
     def deed_serializer

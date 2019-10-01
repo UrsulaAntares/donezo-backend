@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_173132) do
+ActiveRecord::Schema.define(version: 2019_10_01_174923) do
 
   create_table "checklists", force: :cascade do |t|
     t.string "name"
@@ -58,10 +58,11 @@ ActiveRecord::Schema.define(version: 2019_09_27_173132) do
     t.string "scale"
     t.string "pack"
     t.string "status"
-    t.date "duedate"
+    t.date "start"
     t.time "duetime"
     t.date "donedate"
     t.time "donetime"
+    t.date "end"
   end
 
   create_table "environments", force: :cascade do |t|
