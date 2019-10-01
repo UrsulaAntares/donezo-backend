@@ -1,4 +1,4 @@
 class Checklist < ApplicationRecord
-    has_many :action_checklists
-    has_many :actions, through: :action_checklists
+    has_many :deed_checklists
+    has_many :deeds, through: :deed_checklists
 end

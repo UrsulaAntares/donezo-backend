@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  action: one
+  deed: one
   tag: one
 
 two:
-  action: two
+  deed: two
   tag: two

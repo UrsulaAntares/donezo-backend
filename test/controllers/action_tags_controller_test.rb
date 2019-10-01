@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ActionTagsControllerTest < ActionDispatch::IntegrationTest
+class DeedTagsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

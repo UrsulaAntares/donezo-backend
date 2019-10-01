@@ -1,3 +1,3 @@
 class Environment < ApplicationRecord
-    has_many :actions
+    has_many :deeds
 end

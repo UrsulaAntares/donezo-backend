@@ -7,7 +7,10 @@ class TagsController < ApplicationController
     end
 
     def show 
-        tag = Tag.all.find(params[:id])
+        
+        # tag = Tag.all.find(params[:id])
+        tag = Tag.all.find_by(name: params["id"].titlecase) || Tag.all.find_by(name: params["id"])
+
         render json: tag.to_json(tag_serializer)
     end
 
@@ -19,7 +22,7 @@ class TagsController < ApplicationController
     private
 
     def tag_params
-        params.require(:tag).permit(:name, :parent_id)
+        params.require(:tag).permit(:name, :parent_id,  :id)
     end
 
     def tag_serializer

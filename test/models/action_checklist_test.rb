@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ActionChecklistTest < ActiveSupport::TestCase
+class DeedChecklistTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -7,7 +7,9 @@ class EnvironmentsController < ApplicationController
     end
 
     def show 
-        environment = Environment.all.find(params[:id])
+        # environment = Environment.all.find(params[:id])
+
+        environment = Environment.all.find_by(name: params["id"].titlecase) || Environment.all.find_by(name: params["id"])
         render json: environment.to_json(environment_serializer)
     end
 
@@ -19,7 +21,7 @@ class EnvironmentsController < ApplicationController
     private
 
     def environment_params
-        params.require(:tag).permit(:name, :parent_id)
+        params.require(:environment).permit(:name, :parent_id, :id)
     end
 
     def environment_serializer

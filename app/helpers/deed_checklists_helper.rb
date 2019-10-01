@@ -1,0 +1,2 @@
+module DeedChecklistsHelper
+end

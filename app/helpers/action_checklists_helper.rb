@@ -1,2 +1,0 @@
-module ActionChecklistsHelper
-end
