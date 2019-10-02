@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get '/users/:username', to: 'users#show'
   get '/environments/:name', to: 'environments#show'
   get '/tags/:name', to: 'tags#show'
-  
+  get '/deeds/:id', to: 'deeds#show'
+
   
 
   resources :users, only: [:create]

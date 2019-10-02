@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_174923) do
+ActiveRecord::Schema.define(version: 2019_10_01_203932) do
 
   create_table "checklists", force: :cascade do |t|
     t.string "name"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_10_01_174923) do
   end
 
   create_table "deeds", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.integer "duration"
     t.string "description"
     t.datetime "due"

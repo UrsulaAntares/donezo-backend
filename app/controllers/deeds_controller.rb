@@ -36,6 +36,12 @@ class DeedsController < ApplicationController
 
         deed = Deed.all.find(params["id"])
 
+        if deed_params["status"] == "Donezo"
+            deed.start = Date.today
+            deed.end = Date.today
+            deed.save
+        end
+
         if params["result_deed"] 
             Conditional.create(chore_id: deed.id, gratification_id: params["result_deed"]) 
         end
@@ -51,8 +57,12 @@ class DeedsController < ApplicationController
             newtag = Tag.find_or_create_by(name: tag)
             DeedTag.create(tag_id: newtag.id, deed_id: deed.id)
         end
-        environment = Environment.find_or_create_by(name: params["environment"])
-        deed.environment = environment
+        if params["environment_name"]
+            environment = Environment.find_or_create_by(name: params["environment_name"])
+
+            deed.environment = environment
+        end
+
         deed.save
         deed.update(deed_params)
         render json: deed.to_json(deed_serializer)
@@ -73,7 +83,7 @@ class DeedsController < ApplicationController
 
     def deed_params
         params.require(:deed).permit(:name, :user_id, :duration, :tags, :status, :description, :portfolio, :cause_deed, :result_deed,
-         :start, :end, :duetime, :donedate, :donetime, :importance, :desirability, :supplies, :pack, :scale, :environment )
+         :start, :end, :duetime, :donedate, :donetime, :importance, :desirability, :supplies, :pack, :scale, :environment, :environment_name )
     end
 
     def deed_serializer
@@ -82,10 +92,10 @@ class DeedsController < ApplicationController
             :include => [:environment => {:except => [:created_at, :updated_at]},
                          :tags => {:except => [:created_at, :updated_at]},
                          :chores => {:only => [:id],
-                                     :include => [:chore=> {:only => :name}]   
+                                     :include => [:chore=> {:only => [:title, :id]}]   
                                     },
                          :gratifications => {:only => [:id],
-                                    :include => [:gratification => {:only => :name}]     
+                                    :include => [:gratification => {:only => [:title, :id]}]     
                                     },
                 
                         ]
