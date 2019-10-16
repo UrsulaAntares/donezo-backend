@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_203932) do
+ActiveRecord::Schema.define(version: 2019_10_02_173207) do
 
   create_table "checklists", force: :cascade do |t|
     t.string "name"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 2019_10_01_203932) do
     t.datetime "updated_at", null: false
     t.index ["checklist_id"], name: "index_deed_checklists_on_checklist_id"
     t.index ["deed_id"], name: "index_deed_checklists_on_deed_id"
+  end
+
+  create_table "deed_shoppings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "deed_id"
+    t.integer "shopping_id"
   end
 
   create_table "deed_tags", force: :cascade do |t|
@@ -69,6 +76,12 @@ ActiveRecord::Schema.define(version: 2019_10_01_203932) do
     t.string "name"
     t.string "location"
     t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shoppings", force: :cascade do |t|
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

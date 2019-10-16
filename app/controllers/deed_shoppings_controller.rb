@@ -1,0 +1,2 @@
+class DeedShoppingsController < ApplicationController
+end

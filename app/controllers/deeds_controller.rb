@@ -23,6 +23,14 @@ class DeedsController < ApplicationController
         end
 
 
+        shoppings = params["shoppings"].split(", ")
+        shoppings.each do |shopping| 
+            newshop = Shopping.find_or_create_by(title: shopping)
+            DeedShopping.create(shopping_id: newshop.id, deed_id: deed.id)
+        end
+
+ 
+
         #I should work on the serialization to get the above params included
         deed.environment = environment
         deed.save
@@ -57,6 +65,18 @@ class DeedsController < ApplicationController
             newtag = Tag.find_or_create_by(name: tag)
             DeedTag.create(tag_id: newtag.id, deed_id: deed.id)
         end
+
+
+        oldDeedShoppings = DeedShopping.select{ |ds| ds.deed_id == deed.id }
+        oldDeedShoppings.each{|ds| ds.destroy }
+        shoppings = params["shoppings"].split(", ")
+        shoppings.each do |shopping| 
+            newshop = Shopping.find_or_create_by(title: shopping)
+            DeedShopping.create(shopping_id: newshop.id, deed_id: deed.id)
+        end
+
+
+
         if params["environment_name"]
             environment = Environment.find_or_create_by(name: params["environment_name"])
 
@@ -82,8 +102,10 @@ class DeedsController < ApplicationController
     private
 
     def deed_params
-        params.require(:deed).permit(:name, :user_id, :duration, :tags, :status, :description, :portfolio, :cause_deed, :result_deed,
-         :start, :end, :duetime, :donedate, :donetime, :importance, :desirability, :supplies, :pack, :scale, :environment, :environment_name )
+        params.require(:deed).permit(:title, :user_id, :duration, :tags, :status, 
+        :description, :portfolio, :cause_deed, :result_deed, :shoppings,
+        :start, :end, :duetime, :donedate, :donetime, :importance, :desirability, 
+        :supplies, :pack, :scale, :environment, :environment_name )
     end
 
     def deed_serializer
@@ -91,6 +113,7 @@ class DeedsController < ApplicationController
             :except => [:created_at, :updated_at],
             :include => [:environment => {:except => [:created_at, :updated_at]},
                          :tags => {:except => [:created_at, :updated_at]},
+                         :shoppings => {:except => [:created_at, :updated_at]},
                          :chores => {:only => [:id],
                                      :include => [:chore=> {:only => [:title, :id]}]   
                                     },

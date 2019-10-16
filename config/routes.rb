@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :deed_shoppings
+  resources :shoppings
   resources :deed_tags
   resources :deed_checklists
   resources :tags
@@ -15,6 +17,11 @@ Rails.application.routes.draw do
   get '/environments/:name', to: 'environments#show'
   get '/tags/:name', to: 'tags#show'
   get '/deeds/:id', to: 'deeds#show'
+  get '/shoppings/:title', to: 'shoppings#show'
+  # delete '/shoppings/:title', to: 'shoppings#delete'
+  # # destroy '/shoppings/:title', to: 'shoppings#delete'
+  # delete '/shoppings/:title', to: 'shoppings#destroy'
+  # destroy '/shoppings/:title', to: 'shoppings#destroy'
 
   
 
