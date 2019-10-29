@@ -16,17 +16,20 @@ class DeedsController < ApplicationController
 
         environment = Environment.find_or_create_by(name: params["environment"])
 
-        tags = params["tags"].split(", ")
-        tags.each do |tag| 
-            newtag = Tag.find_or_create_by(name: tag)
-            DeedTag.create(tag_id: newtag.id, deed_id: deed.id)
+        if params["tags"]
+            tags = params["tags"].split(", ")
+            tags.each do |tag| 
+                newtag = Tag.find_or_create_by(name: tag)
+                DeedTag.create(tag_id: newtag.id, deed_id: deed.id)
+            end
         end
 
-
-        shoppings = params["shoppings"].split(", ")
-        shoppings.each do |shopping| 
-            newshop = Shopping.find_or_create_by(title: shopping)
-            DeedShopping.create(shopping_id: newshop.id, deed_id: deed.id)
+        if params["shoppings"]
+            shoppings = params["shoppings"].split(", ")
+            shoppings.each do |shopping| 
+                newshop = Shopping.find_or_create_by(title: shopping)
+                DeedShopping.create(shopping_id: newshop.id, deed_id: deed.id)
+            end
         end
 
  
@@ -43,7 +46,7 @@ class DeedsController < ApplicationController
     def update 
 
         deed = Deed.all.find(params["id"])
-
+   
         if deed_params["status"] == "Donezo"
             deed.start = Date.today
             deed.end = Date.today
@@ -60,19 +63,24 @@ class DeedsController < ApplicationController
 
         oldDeedTags = DeedTag.select{ |dt| dt.deed_id == deed.id }
         oldDeedTags.each{|dt| dt.destroy }
-        tags = params["tags"].split(", ")
-        tags.each do |tag| 
-            newtag = Tag.find_or_create_by(name: tag)
-            DeedTag.create(tag_id: newtag.id, deed_id: deed.id)
+        if params["tags"]
+            tags = params["tags"].split(", ")
+            tags.each do |tag| 
+                newtag = Tag.find_or_create_by(name: tag)
+                DeedTag.create(tag_id: newtag.id, deed_id: deed.id)
+            end
         end
 
 
         oldDeedShoppings = DeedShopping.select{ |ds| ds.deed_id == deed.id }
         oldDeedShoppings.each{|ds| ds.destroy }
-        shoppings = params["shoppings"].split(", ")
-        shoppings.each do |shopping| 
-            newshop = Shopping.find_or_create_by(title: shopping)
-            DeedShopping.create(shopping_id: newshop.id, deed_id: deed.id)
+
+        if params["shoppings"]
+            shoppings = params["shoppings"].split(", ")
+            shoppings.each do |shopping| 
+                newshop = Shopping.find_or_create_by(title: shopping)
+                DeedShopping.create(shopping_id: newshop.id, deed_id: deed.id)
+            end
         end
 
 
@@ -85,6 +93,7 @@ class DeedsController < ApplicationController
 
         deed.save
         deed.update(deed_params)
+
         render json: deed.to_json(deed_serializer)
 
     end
