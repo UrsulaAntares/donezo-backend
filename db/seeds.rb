@@ -13,6 +13,8 @@ User.find_or_create_by(name: "Frank", username: "Frank")
 User.create(name: "John", username: "John")
 Deed.find_or_create_by(title: "Make the relationships")
 Deed.create(title: "something else")
+
+Deed.create(title: "something else")
 # Environment.find_or_create_by(title: "Home")
 # Environment.find_or_create_by(title: "Internet")
 # Environment.find_or_create_by(title: "Computer")
