@@ -17,7 +17,7 @@ class ShoppingsController < ApplicationController
 
     def show 
         
-        # shopping = Shopping.all.find(params[:id])
+
         shopping = Shopping.all.find_by(title: params["id"].titlecase) || Shopping.all.find_by(title: params["id"])
 
         render json: shopping.to_json(shopping_serializer)

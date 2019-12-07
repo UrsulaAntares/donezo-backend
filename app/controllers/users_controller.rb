@@ -14,6 +14,7 @@ class UsersController < ApplicationController
         # else
         #   render json: { error: 'failed to create user' }, status: :not_acceptable
         # end
+        #To DO : check that log-ins are logical, easy to create for first visit, and smooth
     end
 
     def show 

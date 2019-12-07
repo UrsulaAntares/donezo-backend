@@ -7,7 +7,7 @@ class EnvironmentsController < ApplicationController
     end
 
     def show 
-        # environment = Environment.all.find(params[:id])
+    
 
         environment = Environment.all.find_by(name: params["id"].titlecase) || Environment.all.find_by(name: params["id"])
         render json: environment.to_json(environment_serializer)
